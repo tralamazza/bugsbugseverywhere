@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  if signed
+    h2 Welcome!
+    h4 Now go buy books or something
+    a(href='/logout') Sign out
+  else
+    a(href='/login') Sign in

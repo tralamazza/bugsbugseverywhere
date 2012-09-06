@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  script(src='/app.js')
+
+  h4 Sign in
+  form(name='zeeForm', method='POST', onsubmit='return validateZeeForm()')
+    p What is your e-email address?
+    label(for='email') My e-mail address is:
+      input(type='text', name='email')
+    p Do you have a RainForest password?
+    .lbl No, I am a new customer.
+      input(type='radio', id='r_passwd1', name='r_passwd', checked='checked', onchange='disablePassword()')
+    .lbl Yes, I have a password:
+      input(type='radio', id='r_passwd2', name='r_passwd', onchange='enablePassword()')
+      input(type='text', id='password', name='password', disabled='disabled')
+    button(type='submit') Sign up using a totally unsecure server
+
