@@ -6,8 +6,8 @@ var app = express();
 app.configure(function() {
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'jade');
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'run to the hills, run for your lives', cookie: { maxAge: 60000 } }));
+  app.use(express.cookieParser('run to the hills, run for your lives'));
+  app.use(express.session());
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -16,7 +16,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-  res.render('login');
+  console.log(req.session);
+  if (req.session.signed)
+    res.redirect('/');
+  else
+    res.render('login');
 });
 
 app.post('/login', function(req, res) {
