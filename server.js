@@ -13,11 +13,11 @@ app.configure(function() {
 });
 
 app.get('/', function(req, res) {
-  res.render('index', { signed: req.session.signed });
+  res.render('index', { session: req.session });
+  req.session.message = '';
 });
 
 app.get('/login', function(req, res) {
-  console.log(req.session);
   if (req.session.signed)
     res.redirect('/');
   else
@@ -25,14 +25,28 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-  if (req.body.password === 'bugbuster')
-    req.session.signed = true;
-  res.redirect('/');
+  if (req.body.rad_user === 'new') {
+    res.redirect('/register?email=' + encodeURIComponent(req.body.email));
+  } else {
+    if (req.body.password === 'bugbuster') {
+      req.session.signed = true;
+      req.session.email = req.body.email;
+  } else
+      req.session.message = 'Wrong user/password';
+    res.redirect('/');
+  }
 });
 
 app.get('/logout', function(req, res) {
   req.session.signed = false;
   res.redirect('/login');
+});
+
+app.get('/register', function(req, res) {
+  req.session.message = 'Account registered: ' + req.query.email;
+  req.session.signed = true;
+  req.session.email = req.query.email;
+  res.redirect('/');
 });
 
 app.listen(8080);

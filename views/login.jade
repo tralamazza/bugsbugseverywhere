@@ -10,9 +10,9 @@ block content
       input(type='text', name='email')
     p Do you have a RainForest password?
     .lbl No, I am a new customer.
-      input(type='radio', id='r_passwd1', name='r_passwd', checked='checked', onchange='disablePassword()')
+      input(type='radio', value='new', id='rad_user_new', name='rad_user', checked='checked', onchange='disablePassword()')
     .lbl Yes, I have a password:
-      input(type='radio', id='r_passwd2', name='r_passwd', onchange='enablePassword()')
+      input(type='radio', value='exists', id='rad_user_exists', name='rad_user', onchange='enablePassword()')
       input(type='text', id='password', name='password', disabled='disabled')
     button(type='submit') Sign up using a totally unsecure server
 

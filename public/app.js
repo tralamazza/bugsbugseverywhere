@@ -1,5 +1,5 @@
 function validateZeeForm() {
-  var email = document.forms['zeeForm']['email'].value;
+  var email = document.forms.zeeForm.email.value;
   if ((/[\w]+@[\w.]+/).test(email)) {
     return true;
   } else {
