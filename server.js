@@ -7,6 +7,7 @@ app.configure(function() {
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'jade');
   app.use(express.cookieParser('run to the hills, run for your lives'));
+  app.use(express.bodyParser());
   app.use(express.session());
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -24,7 +25,8 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-  req.session.signed = true;
+  if (req.body.password === 'bugbuster')
+    req.session.signed = true;
   res.redirect('/');
 });
 
